@@ -27,7 +27,7 @@ export const Home = () => {
   }, [workouts]);
 
   return (
-    <section className="p-5">
+    <section className="p-5 h-full">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {workouts.length > 0 ? workouts.map((workout) => (
             <WorkoutDetails key={workout._id} value={workout} />

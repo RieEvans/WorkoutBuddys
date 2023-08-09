@@ -1,6 +1,8 @@
 import React from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { WorkoutEdit } from "./WorkoutEdit";
+//date
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 export const WorkoutDetails = ({ value }) => {
   const { dispatch, editForm ,setEditForm, notifyDeleteItem } = useWorkoutsContext();
@@ -24,7 +26,7 @@ export const WorkoutDetails = ({ value }) => {
       <div className="w-[300px]">
         <h1>
           {" "}
-          <span className="font-semibold">Title: </span>
+          <span className="font-semibold">Title:</span>
           {value.title}
         </h1>
         <div className="my-2">
@@ -32,7 +34,7 @@ export const WorkoutDetails = ({ value }) => {
           <p className="font-semibold tracking-wide text-sm">{`Reps: ${value.reps}`}</p>
         </div>
         <div>
-          <p>{value.createdAt}</p>   
+          <p>{formatDistanceToNow(new Date(value.createdAt), {addSuffix:true})}</p>   
         </div>
       </div>
 

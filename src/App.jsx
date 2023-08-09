@@ -10,16 +10,16 @@ import { Home } from "./pages/home";
 
 export default function App() {
   return (
-    <div className="bg-slate-50 ">
+    <div className="bg-slate-50 h-screen ">
       <BrowserRouter>
         <Navbar />
         <div className="pages m-auto w-[90%] md:w-[70%]">
           <Routes>
             <Route path="/" element={<Home />} />
           </Routes>
-          <Toaster />
+          <Toaster position="bottom-left" />
         </div>
-      </BrowserRouter>
+      </BrowserRouter>  
     </div>
   );
 }

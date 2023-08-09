@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 
 export const WorkoutForm = () => {
-  const { dispatch, setOpenForm, notify } = useWorkoutsContext();
+  const { dispatch, setOpenForm, notify } = useWorkoutsContext(); // Context hook
+
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState("");
@@ -11,7 +12,7 @@ export const WorkoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const workout = { title, load, reps };
+    const workout = { title,load,reps };
     const response = await fetch("https://backenddb-up9f.onrender.com/api/workouts", {
       method: "POST",
       body: JSON.stringify(workout),
@@ -26,13 +27,10 @@ export const WorkoutForm = () => {
     }
     if (response.ok) {
       notify()
-      setTitle("");
-      setLoad("");
-      setReps("");
       setError(null);
       setEmptyFields([]);
       console.log("New Workout Added", json);
-      setOpenForm(false)
+      setOpenForm(false)  
       dispatch({ type: "CREATE_WORKOUT", payload: json });
     } else {
       console.log("Please Complete the form");
@@ -54,7 +52,7 @@ export const WorkoutForm = () => {
           placeholder="Title"
           type="text"
           className={`${
-            emptyFields.includes("title") ? "border border-red-600" : ""
+            emptyFields.includes("title") ? "border border-red-600" : "border border-green-600"
           } p-2 border shadow-md`}
         />
 
@@ -62,7 +60,7 @@ export const WorkoutForm = () => {
         <input
           onChange={(e) => setLoad(e.target.value)}
           value={load}
-          placeholder="Number"
+          placeholder="number"
           type="text"
           className={`${
             emptyFields.includes("load") ? "border border-red-600" : ""
@@ -73,7 +71,7 @@ export const WorkoutForm = () => {
         <input
           onChange={(e) => setReps(e.target.value)}
           value={reps}
-          placeholder="Number"
+          placeholder="number"
           type="text"
           className={`${
             emptyFields.includes("reps") ? "border border-red-600" : ""

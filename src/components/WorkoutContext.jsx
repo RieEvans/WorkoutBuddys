@@ -19,7 +19,7 @@ export const workoutsReducer = (state, action) => {
       };
     case "UPDATE_WORKOUT":
       return {
-        workouts: action.payload.filter((u) => u._id == action.payload._id),
+        workouts: state.workouts.filter((u) => u._id === action.payload._id),
       };
     default:
       return state;
@@ -65,7 +65,7 @@ export const WorkoutsContextProvider = ({ children }) => {
         setOpenForm,
         editForm,
         setEditForm,
-        notify,
+        notify, 
         notifyDeleteItem,
       }}>
       {children}

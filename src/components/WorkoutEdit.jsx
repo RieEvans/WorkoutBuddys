@@ -16,6 +16,9 @@ export const WorkoutEdit = ({value}) => {
         const response = await fetch('https://backenddb-up9f.onrender.com/api/workouts/' + value._id, {
             method: 'PATCH',
             body: JSON.stringify(workout),
+            headers: {
+              "Content-Type": "application/json",
+            },
         })    
         const json = await response.json()
         if(!response.ok) {
@@ -28,7 +31,6 @@ export const WorkoutEdit = ({value}) => {
             setReps("")
             setError(null)
             setEmptyFields([])
-                
             dispatch({type: 'UPDATE_WORKOUT', payload: json})
             console.log('Form has been Edited')
         }else {
@@ -39,7 +41,7 @@ export const WorkoutEdit = ({value}) => {
     return (
         <section className={`fixed duration-300 inset-0 flex items-center justify-center z-10`}>
           <form
-            onSubmit={handleEdit}
+          
             className=" relative overflow-hidden bg-white w-full md:w-[60%] flex flex-col shadow-md mt-5 p-5 gap-2 ">
             <h3 className="font-semibold text-xl md:text-2xl mb-1">
               Edit Form
@@ -76,8 +78,7 @@ export const WorkoutEdit = ({value}) => {
                 emptyFields.includes("reps") ? "border border-red-600" : ""
               } p-2 border shadow-md`}
             />
-    
-            <button className="bg-yellow-200 font-semibold text-slate-900 p-1 w-[150px] rounded-md shadow-md">
+            <button onClick={handleEdit} className="bg-yellow-200 font-semibold text-slate-900 p-1 w-[150px] rounded-md shadow-md">
               Update
             </button>
             {error && (
